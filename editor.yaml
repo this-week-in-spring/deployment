@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twi-editor-deployment
+  labels:
+    app: twi-editor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twi-editor
+  template:
+    metadata:
+      labels:
+        app: twi-editor
+    spec:
+      containers:
+        - name: twi-editor
+          imagePullPolicy: Always
+          image: gcr.io/bootiful/twi-editor:latest
+          envFrom:
+            - configMapRef:
+                name: twi-configmap
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "twi-editor-service"
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: "twi-editor"
+  type: "LoadBalancer"
