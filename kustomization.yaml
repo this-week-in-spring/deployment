@@ -1,10 +1,9 @@
 ---
 resources:
-  - namespace.yaml
   - editor.yaml
   - api.yaml
 
-namespace: twi
+namespace: twis
 
 configMapGenerator:
   - name: twi-configmap

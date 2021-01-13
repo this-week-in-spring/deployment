@@ -33,3 +33,26 @@ spec:
   selector:
     app: "twi-editor"
   type: "LoadBalancer"
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "twis-editor-ip"
+  name: editor-ingress
+spec:
+  rules:
+    - host: studio.twis.online
+      http:
+        paths:
+          - backend:
+              serviceName: twi-editor-service
+              servicePort: 80
+---
+apiVersion: networking.gke.io/v1beta2
+kind: ManagedCertificate
+metadata:
+  name: editor-certificate
+spec:
+  domains:
+    - studio.twis.online
