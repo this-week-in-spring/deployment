@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: twi-studio-deployment
   labels:
     app: twi-studio
+  name: twi-studio
 spec:
   replicas: 1
   selector:
@@ -15,22 +15,23 @@ spec:
         app: twi-studio
     spec:
       containers:
-        - name: twi-studio
-
+        - envFrom:
+            - configMapRef:
+                name: twi-configmap
+          image: gcr.io/bootiful/twi-studio:latest
+          imagePullPolicy: Always
+          name:  twi-studio
           readinessProbe:
             httpGet:
               port: 80
-              path: /
+              path:  /
           livenessProbe:
             httpGet:
               port: 80
               path: /
+          ports:
+            - containerPort: 80
 
-          imagePullPolicy: Always
-          image: gcr.io/bootiful/twi-studio:latest
-          envFrom:
-            - configMapRef:
-                name: twi-configmap
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -41,7 +42,7 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 8000
+      targetPort: 80
   selector:
     app: twi-studio
   type: LoadBalancer
