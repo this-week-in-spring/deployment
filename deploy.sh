@@ -37,7 +37,7 @@ gcloud container clusters list | grep $GKE_CLUSTER_NAME || deploy_new_gke_cluste
 echo "Deploying This Week In..."
 SECRETS_FN=twi-configmap.env
 cat <<EOF >${SECRETS_FN}
-VUE_APP_SERVICE_ROOT=https://bookmark-api.twis.online/actuator/health
+VUE_APP_SERVICE_ROOT=https://bookmark-api.twis.online/
 SPRING_R2DBC_USERNAME=$DB_USER
 SPRING_R2DBC_PASSWORD=$DB_PW
 SPRING_R2DBC_URL=r2dbc:postgres://$DB_HOST/$DB_DB
