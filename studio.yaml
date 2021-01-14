@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twi-studio-deployment
+  labels:
+    app: twi-studio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twi-studio
+  template:
+    metadata:
+      labels:
+        app: twi-studio
+    spec:
+      containers:
+        - name: twi-studio
+
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 80
+              path: /
+
+          imagePullPolicy: Always
+          image: gcr.io/bootiful/twi-studio:latest
+          envFrom:
+            - configMapRef:
+                name: twi-configmap
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: twi-studio-service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+  selector:
+    app: twi-studio
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    networking.gke.io/managed-certificates: "twi-studio-certificate"
+    kubernetes.io/ingress.global-static-ip-name: "twis-twi-studio-ip"
+  name: twi-studio-ingress
+spec:
+  rules:
+    - host: studio.twis.online
+      http:
+        paths:
+          - backend:
+              serviceName: twi-studio-service
+              servicePort: 80
+---
+apiVersion: networking.gke.io/v1beta2
+kind: ManagedCertificate
+metadata:
+  name: twi-studio-certificate
+spec:
+  domains:
+    - studio.twis.online

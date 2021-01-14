@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: twi-bookmark-api-deployment
   labels:
     app: twi-bookmark-api
+  name: twi-bookmark-api
 spec:
   replicas: 1
   selector:
@@ -15,12 +15,27 @@ spec:
         app: twi-bookmark-api
     spec:
       containers:
-        - name: twi-editor-view
-          imagePullPolicy: Always
-          image: gcr.io/bootiful/twi-bookmark-api:latest
-          envFrom:
+        - envFrom:
             - configMapRef:
                 name: twi-configmap
+          image: gcr.io/bootiful/twi-bookmark-api:latest
+          imagePullPolicy: Always
+          name:  twi-bookmark-api
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /actuator/health/readiness
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /actuator/health/liveness
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              memory: "2Gi"
+            requests:
+              memory: "2Gi"
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -40,11 +55,13 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "twis-api-ip"
-  name: api-ingress
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    networking.gke.io/managed-certificates: "twi-bookmark-api-certificate"
+    kubernetes.io/ingress.global-static-ip-name: "twis-twi-api-ip"
+  name: twi-bookmark-api-ingress
 spec:
   rules:
-    - host: api.twis.online
+    - host: bookmark-api.twis.online
       http:
         paths:
           - backend:
@@ -54,7 +71,7 @@ spec:
 apiVersion: networking.gke.io/v1beta2
 kind: ManagedCertificate
 metadata:
-  name: api-certificate
+  name: twi-bookmark-api-certificate
 spec:
   domains:
-    - api.twis.online
+    - bookmark-api.twis.online
