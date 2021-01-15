@@ -1,0 +1,19 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: bookmark-ingest-cronjob
+spec:
+  schedule: "*/10 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: backup
+              image: gcr.io/bootiful/twi-bookmark-ingest-job:latest
+              imagePullPolicy: Always
+              envFrom:
+                - configMapRef:
+                    name: twi-configmap
+          restartPolicy: OnFailure

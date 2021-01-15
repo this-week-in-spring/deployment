@@ -1,7 +1,9 @@
 ---
 resources:
-  - api.yaml
+  - bookmark-api.yaml
   - studio.yaml
+  - bookmark-ingest-cronjob.yaml
+
 
 namespace: twis
 

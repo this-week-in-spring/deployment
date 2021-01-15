@@ -3,19 +3,20 @@
 set -e
 set -o pipefail
 
+##
+##
+## these values should come from the CI env's secrets!
 source $HOME/Desktop/twis-env.sh
-
-
-
-
-function static_ip(){
+##
+##
+function static_ip() {
   NS=$1
   APP=$2
   RESERVED_IP_NAME=${NS}-twi-${APP}-ip
   gcloud compute addresses list --format json | jq '.[].name' -r | grep $RESERVED_IP_NAME || gcloud compute addresses create $RESERVED_IP_NAME --global
 }
 
-# twis-twi-api-ip
+
 static_ip $GKE_NS api
 static_ip $GKE_NS studio
 
@@ -35,12 +36,21 @@ function deploy_new_gke_cluster() {
 gcloud container clusters list | grep $GKE_CLUSTER_NAME || deploy_new_gke_cluster
 
 echo "Deploying This Week In..."
+
+
 SECRETS_FN=twi-configmap.env
+
 cat <<EOF >${SECRETS_FN}
 VUE_APP_SERVICE_ROOT=https://bookmark-api.twis.online/
+PINBOARD_TOKEN=$PINBOARD_TOKEN
+SPRING_R2DBC_URL=r2dbc:postgres://$DB_HOST/$DB_DB
 SPRING_R2DBC_USERNAME=$DB_USER
 SPRING_R2DBC_PASSWORD=$DB_PW
-SPRING_R2DBC_URL=r2dbc:postgres://$DB_HOST/$DB_DB
+SPRING_DATASOURCE_URL=jdbc:postgresql://$DB_HOST/$DB_DB
+SPRING_DATASOURCE_USERNAME=$DB_USER
+SPRING_DATASOURCE_PASSWORD=$DB_PW
+INGEST_TAGS=$INGEST_TAGS
+INGEST_INGESTED_TAG=$INGEST_INGESTED_TAG
 EOF
 
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
