@@ -71,7 +71,8 @@ rm $SECRETS_FN
 function run_job(){
   CJ=$1
   JOB_ID=$2
-  kubectl get jobs/${JOB_ID} && kubectl delete jobs/${JOB_ID} ; kubectl create job --from=cronjobs/$CJ $JOB_ID
+  kubectl get jobs/${JOB_ID} && kubectl delete jobs/${JOB_ID} ;
+  kubectl create job --from=cronjobs/$CJ $JOB_ID
 }
 
 run_job feed-ingest-cronjob fic
