@@ -1,7 +1,8 @@
+---
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: bookmark-ingest-cronjob
+  name: feed-ingest-cronjob
 spec:
   schedule: "*/10 * * * *"
   jobTemplate:
@@ -10,7 +11,7 @@ spec:
         spec:
           containers:
             - name: backup
-              image: gcr.io/bootiful/twi-bookmark-ingest-job:latest
+              image: gcr.io/bootiful/twi-feed-ingest-job:latest
               imagePullPolicy: Always
               envFrom:
                 - configMapRef:
