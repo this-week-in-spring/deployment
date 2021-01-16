@@ -54,6 +54,8 @@ INGEST_INGESTED_TAG=$INGEST_INGESTED_TAG
 SPRING_REDIS_HOST=${REDIS_HOST}
 SPRING_REDIS_PASSWORD=${REDIS_PW}
 SPRING_REDIS_PORT=${REDIS_PORT}
+TWITTER_TWI_CLIENT_KEY_SECRET=V7ZUj8wo0HPLDyi6SiFntFyEjeB67P8kMoWtMTX4vreYsqcnoo
+TWITTER_TWI_CLIENT_KEY=JFdKTB8Unk2jesE9J35Kc0O4D
 EOF
 
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
@@ -64,3 +66,7 @@ sed "s|<NS>|${GKE_NS}|" old.yaml >$KF
 kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
+
+## test
+kubectl get jobs/fic && kubectl delete jobs/fic ; kubectl create job --from=cronjobs/feed-ingest-cronjob fic
+kubectl get jobs/tic && kubectl delete jobs/tic ; kubectl create job --from=cronjobs/twitter-ingest-cronjob tic

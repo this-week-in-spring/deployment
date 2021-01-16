@@ -3,8 +3,8 @@ resources:
   - bookmark-api.yaml
   - studio.yaml
   - bookmark-ingest-cronjob.yaml
+  - twitter-ingest-cronjob.yaml
   - feed-ingest-cronjob.yaml
-
 
 namespace: twis
 
