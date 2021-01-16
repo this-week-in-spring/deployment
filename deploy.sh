@@ -68,5 +68,12 @@ mv old.yaml $KF
 rm $SECRETS_FN
 
 ## test
-kubectl get jobs/fic && kubectl delete jobs/fic ; kubectl create job --from=cronjobs/feed-ingest-cronjob fic
-kubectl get jobs/tic && kubectl delete jobs/tic ; kubectl create job --from=cronjobs/twitter-ingest-cronjob tic
+function run_job(){
+  CJ=$1
+  JOB_ID=$2
+  kubectl get jobs/${JOB_ID} && kubectl delete jobs/${JOB_ID} ; kubectl create job --from=cronjobs/$CJ $JOB_ID
+}
+
+run_job feed-ingest-cronjob fic
+run_job twitter-ingest-cronjob tic
+run_job bookmark-ingest-cronjob bic
