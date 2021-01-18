@@ -78,6 +78,7 @@ EOF
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
 # kubectl get cronjobs | cut -f1 -d\  | tail -n3  | while read l ; do k delete cronjobs/$l ; done 
 # kubectl get jobs | cut -f1 -d\  | tail -n3  | while read l ; do k delete jobs/$l ; done  
+kubectl config set-context --current --namespace=$GKE_NS
 
 
 
@@ -88,7 +89,7 @@ kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
  
-sleep 5   
+# sleep 5   
 
 # echo "-----jobs----"
 # kubectl get jobs 
