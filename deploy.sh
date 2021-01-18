@@ -25,13 +25,6 @@ function create_job(){
   kubectl create job --from=$NCJ ${CJ}-job  || echo "Could not create a new cronjob.batch from $NCJ"
 }
 
-function clean_job(){
-  CJ=$1
-  JOB_ID=$2
-  kubectl get jobs/${JOB_ID} && kubectl delete jobs/${JOB_ID} || echo "No jobs for cronjob/$CJ to delete.";
-}
-
-
 function deploy_new_gke_cluster() {
   gcloud --quiet beta container --project $GKE_PROJECT_ID clusters create "${GKE_CLUSTER_NAME}" \
     --zone "$GCLOUD_ZONE" --no-enable-basic-auth \
@@ -45,9 +38,7 @@ function deploy_new_gke_cluster() {
     --workload-pool=${GKE_PROJECT_ID}.svc.id.goog
 }
 
-
 echo "Deploying This Week In..."
-
 
 static_ip $GKE_NS api
 static_ip $GKE_NS studio
@@ -74,13 +65,8 @@ TWITTER_TWI_CLIENT_KEY_SECRET=${TWITTER_TWI_CLIENT_KEY_SECRET}
 TWITTER_TWI_CLIENT_KEY=${TWITTER_TWI_CLIENT_KEY}
 EOF
 
-
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
-# kubectl get cronjobs | cut -f1 -d\  | tail -n3  | while read l ; do k delete cronjobs/$l ; done 
-# kubectl get jobs | cut -f1 -d\  | tail -n3  | while read l ; do k delete jobs/$l ; done  
 kubectl config set-context --current --namespace=$GKE_NS
-
-
 
 KF=kustomization.yaml
 cp $KF old.yaml
@@ -89,20 +75,8 @@ kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
  
-# sleep 5   
-
-# echo "-----jobs----"
-# kubectl get jobs 
-
-echo "-----cronjobs----"
-kubectl get cronjobs 
-
 for job in ${jobs[@]} ;  do 
-  create_job $job ${job}_cronjob
+  create_job $job  
 done
-
-# run_job feed-ingest-cronjob fic
-# run_job twitter-ingest-cronjob tic
-# run_job bookmark-ingest-cronjob bic
 
 echo "Deployed This Week In..."
