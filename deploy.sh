@@ -87,6 +87,7 @@ kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
  
+# sleep 5
 for job in ${jobs[@]} ;  do 
   create_job $job ${job}_cronjob
 done
