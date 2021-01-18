@@ -75,10 +75,10 @@ EOF
 
 
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
+# kubectl get cronjobs | cut -f1 -d\  | tail -n3  | while read l ; do k delete cronjobs/$l ; done 
+# kubectl get jobs | cut -f1 -d\  | tail -n3  | while read l ; do k delete jobs/$l ; done  
 
-# for job in ${jobs[@]} ;  do 
-#   clean_job $job ${job}_cronjob
-# done
+
 
 KF=kustomization.yaml
 cp $KF old.yaml
