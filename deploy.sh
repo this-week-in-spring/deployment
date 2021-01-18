@@ -6,7 +6,7 @@ set -o pipefail
 ##
 ##
 ## these values should come from the CI env's secrets!
-source $HOME/Desktop/twis-env.sh
+# source $HOME/Desktop/twis-env.sh
 ##
 ##
 function static_ip() {
