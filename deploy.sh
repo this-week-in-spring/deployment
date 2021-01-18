@@ -22,7 +22,9 @@ function static_ip() {
 function create_job(){
   CJ=$1
   NCJ=cronjob.batch/$CJ
-  kubectl create job --from=$NCJ ${CJ}-job  || echo "Could not create a new cronjob.batch from $NCJ"
+  JOB_NAME=${CJ}-job
+  kubectl get jobs/$JOB_NAME  && kubectl delete jobs/$JOB_NAME || echo "could not find an existing job (${JOB_NAME}) to delete."
+  kubectl create job --from=$NCJ $JOB_NAME && echo "Created the new job ${NCJ}."  || echo "Could not create a new cronjob.batch from $NCJ"
 }
 
 function deploy_new_gke_cluster() {
