@@ -89,6 +89,13 @@ mv old.yaml $KF
 rm $SECRETS_FN
  
 sleep 2   
+
+echo "-----jobs----"
+kubectl get jobs 
+
+echo "-----cronjobs----"
+kubectl get cronjobs 
+
 for job in ${jobs[@]} ;  do 
   create_job $job ${job}_cronjob
 done
