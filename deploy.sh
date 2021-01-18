@@ -88,10 +88,10 @@ kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
  
-sleep 2   
+sleep 5   
 
-echo "-----jobs----"
-kubectl get jobs 
+# echo "-----jobs----"
+# kubectl get jobs 
 
 echo "-----cronjobs----"
 kubectl get cronjobs 
