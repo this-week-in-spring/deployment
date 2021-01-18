@@ -21,7 +21,8 @@ function static_ip() {
 
 function create_job(){
   CJ=$1
-  kubectl create job --from=cronjob.batch/$CJ ${CJ}-job  || echo "Could not create a new cronjob cronjobs/$CJ"
+  NCJ=cronjob.batch/$CJ
+  kubectl create job --from=$NCJ ${CJ}-job  || echo "Could not create a new cronjob.batch from $NCJ"
 }
 
 function clean_job(){
@@ -87,7 +88,7 @@ kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
  
-# sleep 5
+sleep 2   
 for job in ${jobs[@]} ;  do 
   create_job $job ${job}_cronjob
 done
