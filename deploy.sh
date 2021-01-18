@@ -3,6 +3,9 @@
 set -e
 set -o pipefail
 
+
+jobs=("feed-ingest-cronjob" "twitter-ingest-cronjob" "bookmark-ingest-cronjob")
+
 ##
 ##
 ## these values should come from the CI env's secrets!
@@ -16,9 +19,18 @@ function static_ip() {
   gcloud compute addresses list --format json | jq '.[].name' -r | grep $RESERVED_IP_NAME || gcloud compute addresses create $RESERVED_IP_NAME --global
 }
 
+function create_job(){
+  CJ=$1
+  JOB_ID=$2
+  kubectl create job --from=cronjobs/$CJ $JOB_ID || echo "Could not create a new cronjob cronjobs/$CJ"
+}
 
-static_ip $GKE_NS api
-static_ip $GKE_NS studio
+function clean_job(){
+  CJ=$1
+  JOB_ID=$2
+  kubectl get jobs/${JOB_ID} && kubectl delete jobs/${JOB_ID} || echo "No jobs for cronjob/$CJ to delete.";
+}
+
 
 function deploy_new_gke_cluster() {
   gcloud --quiet beta container --project $GKE_PROJECT_ID clusters create "${GKE_CLUSTER_NAME}" \
@@ -33,10 +45,14 @@ function deploy_new_gke_cluster() {
     --workload-pool=${GKE_PROJECT_ID}.svc.id.goog
 }
 
-gcloud container clusters list | grep $GKE_CLUSTER_NAME || deploy_new_gke_cluster
 
 echo "Deploying This Week In..."
 
+
+static_ip $GKE_NS api
+static_ip $GKE_NS studio
+
+gcloud container clusters list | grep $GKE_CLUSTER_NAME || deploy_new_gke_cluster
 
 SECRETS_FN=twi-configmap.env
 
@@ -58,7 +74,12 @@ TWITTER_TWI_CLIENT_KEY_SECRET=${TWITTER_TWI_CLIENT_KEY_SECRET}
 TWITTER_TWI_CLIENT_KEY=${TWITTER_TWI_CLIENT_KEY}
 EOF
 
+
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
+
+for job in ${jobs[@]} ;  do 
+  clean_job $job ${job}_cronjob
+done
 
 KF=kustomization.yaml
 cp $KF old.yaml
@@ -66,18 +87,13 @@ sed "s|<NS>|${GKE_NS}|" old.yaml >$KF
 kubectl apply -k .
 mv old.yaml $KF
 rm $SECRETS_FN
+ 
+for job in ${jobs[@]} ;  do 
+  create_job $job ${job}_cronjob
+done
 
-## test
-function run_job(){
-  CJ=$1
-  JOB_ID=$2
-  kubectl get jobs/${JOB_ID} && kubectl delete jobs/${JOB_ID} || echo "No jobs for cronjob/$CJ to delete.";
-  kubectl create job --from=cronjobs/$CJ $JOB_ID || echo "Could not create a new cronjob cronjobs/$CJ"
-    
-}
-
-run_job feed-ingest-cronjob fic
-run_job twitter-ingest-cronjob tic
-run_job bookmark-ingest-cronjob bic
+# run_job feed-ingest-cronjob fic
+# run_job twitter-ingest-cronjob tic
+# run_job bookmark-ingest-cronjob bic
 
 echo "Deployed This Week In..."
