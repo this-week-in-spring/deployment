@@ -21,8 +21,7 @@ function static_ip() {
 
 function create_job(){
   CJ=$1
-  JOB_ID=$2
-  kubectl create job --from=cronjobs/$CJ $JOB_ID || echo "Could not create a new cronjob cronjobs/$CJ"
+  kubectl create job --from=cronjob.batch/$CJ ${CJ}-job  || echo "Could not create a new cronjob cronjobs/$CJ"
 }
 
 function clean_job(){
@@ -77,9 +76,9 @@ EOF
 
 kubectl get ns/$GKE_NS || kubectl create ns $GKE_NS
 
-for job in ${jobs[@]} ;  do 
-  clean_job $job ${job}_cronjob
-done
+# for job in ${jobs[@]} ;  do 
+#   clean_job $job ${job}_cronjob
+# done
 
 KF=kustomization.yaml
 cp $KF old.yaml
