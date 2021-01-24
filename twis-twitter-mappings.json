@@ -1,0 +1,82 @@
+{ 
+
+	"kubernetesio" : {
+		"twis": [ ] 
+	},
+	"springcentral":{  
+		"twis": [ ] 
+	} 
+,
+
+ 
+
+	"vmware":{ 
+		"twis":["spring"    , "SpringOne" , "SpringBoot", "java" , "azure" , "kubernetes" , "CloudFoundry" , "TAS", "TKG",    "Spring Cloud" , "Spring Boot" ] 
+	} 
+,
+
+	"JavaAtMicrosoft":{ 
+		"twis": [ "Azul", "spring" , "SpringBoot", "java" , "azure" , "SpringCloud"  ,"SpringBoot" , "Spring Cloud" , "Spring Boot" , "JDK" ] 
+	} 
+,
+
+	"vmwaretanzu":{ 
+		"twis":[  ] 
+ 	} 
+,
+
+ 
+
+	"springframework":{ 
+			"twis":[ ] 
+	} 
+,
+
+	"springboot":{ 
+			"twis":[ ] 
+	} 
+,
+
+	"springcloud":{ 
+			"twis":[ ] 
+	} 
+,
+
+	"springsecurity":{ 
+			"twis":[ ] 
+	} 
+,
+
+	"springdata":{ 
+		"twis":[ ] 
+	} 
+,
+
+	"java":{ 
+		"twis":[ ] 		 
+	} 
+,
+
+	"wattersjames":{ 
+		"twis":[ ] 
+	} 
+  
+	 , 
+	 "rabbitmq": { 
+		"twis":[  ] 
+	} 
+,
+
+	"confluentInc":{ 
+		"twis":[ ] 
+	} 
+,
+
+	"cloudfoundry": { 
+		"twis":[  ],
+		"cloudfoundry":[  ] 
+	} 
+ 
+ 
+ 
+}
