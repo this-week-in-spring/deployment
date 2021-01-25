@@ -29,6 +29,7 @@ env:
   TWI_DOMAIN : twis.online 
   INGEST_TAG : twis 
   INGESTED_TAG: ingest-twis 
+  # KUBECONFIG: ${{ env.GITHUB_WORKSPACE }}/kube
 
 on:
   push:
@@ -60,5 +61,8 @@ jobs:
 
       - name: Deploy
         run: |
+          echo $KUBECONFIG
+          ls -la $HOME
+          ls -la $HOME/.kube/config 
           cd $GITHUB_WORKSPACE
           ./install.sh
