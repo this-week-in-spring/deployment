@@ -55,10 +55,10 @@ jobs:
           gcloud --quiet auth configure-docker
           gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone "$GCLOUD_ZONE" --project ${GCLOUD_PROJECT}
 
-      # - name: Helm tool installer
-      #   uses: Azure/setup-helm@v1
-      #   with:
-      #     version: 3.5.0
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v1
+        with:
+          version: 3.5.0
 
       - name: Deploy
         run: |
