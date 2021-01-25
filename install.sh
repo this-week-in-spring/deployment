@@ -21,7 +21,7 @@ function init(){
 init 
 
 HELM_COMMAND="install"
-helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
+helm list -n $NS | grep $CHART_NAME && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
 
 helm $HELM_COMMAND  \
