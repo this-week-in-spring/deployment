@@ -14,7 +14,7 @@ CHART_NAME=twi-${NS}-helm-chart
 echo "-------"
 kubectl get pods -n $NS 
 
-helm -n $NS list 
+helm   --all-namespaces  list 
 helm --namespace $NS list 
 
 function create_ip(){
