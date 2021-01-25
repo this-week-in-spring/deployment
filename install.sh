@@ -2,6 +2,8 @@
 
 NS=$TWI_NS
 CHART_NAME=twi-${NS}-helm-chart
+INGEST_FEED_ENCODED_MAPPINGS=$( cat feed-mappings.json | base64 | tr -d '\n' )
+INGEST_TWITTER_ENCODED_MAPPINGS=$( cat twitter-mappings.json | base64 | tr -d '\n' )
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
 helm repo add stable https://charts.helm.sh/stable
@@ -18,10 +20,9 @@ function init(){
     kubectl get ns/$NS || kubectl create namespace ${NS} 
 }
 
+
 init 
 
-export INGEST_FEED_ENCODED_MAPPINGS=$( cat feed-mappings.json | base64 | tr -d '\n'   )
-export INGEST_TWITTER_ENCODED_MAPPINGS=$( cat twitter-mappings.json | base64 | tr -d '\n'  )
 
 
 HELM_COMMAND="install"
