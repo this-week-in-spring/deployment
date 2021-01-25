@@ -19,13 +19,13 @@ env:
   REDIS_HOST: ${{ secrets.REDIS_HOST }} 
   REDIS_PORT: ${{ secrets.REDIS_PORT }} 
   REDIS_PW: ${{ secrets.REDIS_PW }} 
-  TWITTER_CLIENT_KEY: ${{ secrets.TWITTER_TWI_CLIENT_KEY }} 
-  TWITTER_CLIENT_KEY_SECRET: ${{ secrets.TWITTER_TWI_CLIENT_KEY_SECRET  }}
-  TWI_PREFIX: ${{ secrets.TWI_PREFIX }} 
-  TWI_NS: twis 
-  TWI_DOMAIN : twis.online 
-  INGEST_TAG : twis 
-  INGESTED_TAG: ingest-twis 
+  TWITTER_CLIENT_KEY : ${{ secrets.TWITTER_TWI_CLIENT_KEY }} 
+  TWITTER_CLIENT_KEY_SECRET : ${{ secrets.TWITTER_TWI_CLIENT_KEY_SECRET  }}
+  TWI_PREFIX : ${{ secrets.TWI_NS }} 
+  TWI_NS :  ${{ secrets.TWI_NS  }} 
+  TWI_DOMAIN : ${{ secrets.TWI_DOMAIN  }}
+  INGEST_TAG :  ${{ secrets.INGEST_TAG }}
+  INGESTED_TAG :  ${{ secrets.INGESTED_TAG }}
   INGEST_FEED_ENCODED_MAPPINGS : ${{ secrets.INGEST_FEED_ENCODED_MAPPINGS }}
   INGEST_TWITTER_ENCODED_MAPPINGS : ${{ secrets.INGEST_TWITTER_ENCODED_MAPPINGS }}
   
