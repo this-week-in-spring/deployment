@@ -9,6 +9,10 @@ INGEST_TWITTER_ENCODED_MAPPINGS=$( cat twitter-mappings.json | base64  )
 NS=$TWI_NS
 CHART_NAME=twi-${NS}-helm-chart 
 
+echo "-------"
+kubectl get pods -n $NS 
+
+echo "-------"
 helm list -n $NS
 
 function create_ip(){
