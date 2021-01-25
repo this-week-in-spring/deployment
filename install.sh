@@ -3,6 +3,8 @@
 
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
+helm repo add stable https://charts.helm.sh/stable
+
 
 INGEST_FEED_ENCODED_MAPPINGS=$( base64 feed-mappings.json   )
 INGEST_TWITTER_ENCODED_MAPPINGS=$( base64 twitter-mappings.json     )
@@ -30,6 +32,14 @@ function init(){
 init 
 
 HELM_COMMAND="install"
+echo $NS 
+
+echo "---------------------"
+echo "ls"
+helm ls -n $NS 
+
+echo "---------------------"
+echo "list"
 helm list -n $NS | grep $CHART_NAME && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
 
