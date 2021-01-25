@@ -25,7 +25,7 @@ env:
   TWITTER_CLIENT_KEY: ${{ secrets.TWITTER_TWI_CLIENT_KEY }} 
   TWITTER_CLIENT_KEY_SECRET: ${{ secrets.TWITTER_TWI_CLIENT_KEY_SECRET  }}
   TWI_PREFIX: ${{ secrets.TWI_PREFIX }} 
-  NS: twis 
+  TWI_NS: twis 
   TWI_DOMAIN : twis.online 
   INGEST_TAG : twis 
   INGESTED_TAG: ingest-twis 
