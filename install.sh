@@ -4,8 +4,8 @@
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
 
-INGEST_FEED_ENCODED_MAPPINGS=$( cat feed-mappings.json | base64 )
-INGEST_TWITTER_ENCODED_MAPPINGS=$( cat twitter-mappings.json | base64  )
+INGEST_FEED_ENCODED_MAPPINGS=$( base64 feed-mappings.json   )
+INGEST_TWITTER_ENCODED_MAPPINGS=$( base64 twitter-mappings.json     )
 NS=$TWI_NS
 CHART_NAME=twi-${NS}-helm-chart 
 
@@ -14,7 +14,7 @@ kubectl get pods -n $NS
 
 echo "-------"
 helm list -n $NS
-
+echo "-------"
 exit 1
 
 function create_ip(){
