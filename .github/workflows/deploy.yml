@@ -16,8 +16,6 @@ env:
   GKE_CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }} 
   GKE_NS: ${{ secrets.GKE_NS  }}
   GKE_PROJECT_ID: ${{ secrets.GKE_PROJECT_ID  }}
-  INGEST_INGESTED_TAG: ${{ secrets.INGEST_INGESTED_TAG  }}
-  INGEST_TAGS: ${{ secrets.INGEST_TAGS  }}
   PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }} 
   REDIS_HOST: ${{ secrets.REDIS_HOST }} 
   REDIS_PORT: ${{ secrets.REDIS_PORT }} 
@@ -29,7 +27,8 @@ env:
   TWI_DOMAIN : twis.online 
   INGEST_TAG : twis 
   INGESTED_TAG: ingest-twis 
-  # KUBECONFIG: ${{ env.GITHUB_WORKSPACE }}/kube
+  INGEST_FEED_ENCODED_MAPPINGS : ${{ secrets.INGEST_FEED_ENCODED_MAPPINGS }} 
+  INGEST_TWITTER_ENCODED_MAPPINGS : ${{ secrets.INGEST_TWITTER_ENCODED_MAPPINGS }} 
 
 on:
   push:
@@ -60,13 +59,8 @@ jobs:
         uses: Azure/setup-helm@v1
         with:
           version: 3.5.0
-          
 
       - name: Deploy
         run: |
-          helm search hub wordpress
-          echo $KUBECONFIG
-          ls -la $HOME
-          ls -la $HOME/.kube/config 
           cd $GITHUB_WORKSPACE
           ./install.sh
