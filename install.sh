@@ -1,18 +1,20 @@
 #!/usr/bin/env bash 
 
-kubectl get namespaces 
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
-helm repo add stable https://charts.helm.sh/stable
-helm upgrade
+
+kubectl get namespaces 
+
+helm list --all-namespaces
+
+# helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
+# helm repo add stable https://charts.helm.sh/stable
 
 NS=$TWI_NS
 CHART_NAME=twi-${NS}-helm-chart 
 
-# echo "-------"
-# kubectl get pods -n $NS 
 
-helm list --all-namespaces
+
 
 function create_ip(){
     IPN=$1
@@ -28,19 +30,6 @@ function init(){
 init 
 
 HELM_COMMAND="install"
-echo $NS 
-
-echo "---------------------"
-echo "ls"
-helm ls -n $NS 
-
-echo "---------------------"
-echo "list"
-helm list -n $NS 
-
-exit 1
-helm list -n $NS | grep $CHART_NAME && HELM_COMMAND="upgrade" 
-echo "Performing a helm ${HELM_COMMAND}..."
 
 helm $HELM_COMMAND  \
  --set twi.prefix=$NS \
