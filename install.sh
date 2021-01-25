@@ -1,17 +1,13 @@
 #!/usr/bin/env bash 
 
+NS=$TWI_NS
+CHART_NAME=twi-${NS}-helm-chart
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
+helm repo add stable https://charts.helm.sh/stable
 
 kubectl get namespaces 
 
-helm list --all-namespaces
-
-# helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
-# helm repo add stable https://charts.helm.sh/stable
-
-NS=$TWI_NS
-CHART_NAME=twi-${NS}-helm-chart 
 
 
 
@@ -29,7 +25,10 @@ function init(){
 
 init 
 
+
 HELM_COMMAND="install"
+
+helm list --all-namespaces | grep $CHART_NAME  && HELM_COMMAND="upgrade"
 
 helm $HELM_COMMAND  \
  --set twi.prefix=$NS \
