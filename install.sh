@@ -5,12 +5,7 @@ CHART_NAME=twi-${NS}-helm-chart
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
 helm repo add stable https://charts.helm.sh/stable
-
 kubectl get namespaces 
-
-
-
-
 
 function create_ip(){
     IPN=$1
@@ -27,9 +22,7 @@ init
 
 
 HELM_COMMAND="install"
-
 helm list --all-namespaces | grep $CHART_NAME  && HELM_COMMAND="upgrade"
-
 helm $HELM_COMMAND  \
  --set twi.prefix=$NS \
  --set twi.domain=$TWI_DOMAIN \

@@ -20,7 +20,6 @@ env:
   REDIS_PW: ${{ secrets.REDIS_PW }} 
   TWITTER_CLIENT_KEY : ${{ secrets.TWITTER_TWI_CLIENT_KEY }} 
   TWITTER_CLIENT_KEY_SECRET : ${{ secrets.TWITTER_TWI_CLIENT_KEY_SECRET  }}
-  # TWI_PREFIX : ${{ secrets.TWI_NS }} 
   TWI_NS :  ${{ secrets.TWI_NS  }} 
   TWI_DOMAIN : ${{ secrets.TWI_DOMAIN  }}
   INGEST_TAG :  ${{ secrets.INGEST_TAG }}
