@@ -15,6 +15,8 @@ kubectl get pods -n $NS
 echo "-------"
 helm list -n $NS
 
+exit 1
+
 function create_ip(){
     IPN=$1
     gcloud compute addresses list --format json | jq '.[].name' -r | grep $IPN || gcloud compute addresses create $IPN --global
