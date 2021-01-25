@@ -15,7 +15,6 @@ kubectl get pods -n $NS
 echo "-------"
 helm list -n $NS
 echo "-------"
-exit 1
 
 function create_ip(){
     IPN=$1
