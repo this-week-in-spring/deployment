@@ -40,6 +40,9 @@ helm ls -n $NS
 
 echo "---------------------"
 echo "list"
+helm list -n $NS 
+
+exit 1
 helm list -n $NS | grep $CHART_NAME && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
 
