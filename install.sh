@@ -11,11 +11,10 @@ helm upgrade
 NS=$TWI_NS
 CHART_NAME=twi-${NS}-helm-chart 
 
-echo "-------"
-kubectl get pods -n $NS 
+# echo "-------"
+# kubectl get pods -n $NS 
 
-helm   --all-namespaces  list 
-helm --namespace $NS list 
+helm list --all-namespaces
 
 function create_ip(){
     IPN=$1
