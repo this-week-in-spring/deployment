@@ -1,7 +1,6 @@
 #!/usr/bin/env bash 
 
-
-kubectl get pods 
+kubectl get namespaces 
 
 helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
 helm repo add stable https://charts.helm.sh/stable
