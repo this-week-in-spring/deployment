@@ -1,9 +1,8 @@
 { 
-	"http://feeds.feedburner.com/vmware/vmworld" : [ "twis" , "vmware"] , 	 
-	"https://blogs.vmware.com/research/feed/" : [ "twis" , "vmware"] , 	 
-	"https://blogs.vmware.com/opensource/feed/" : [ "twis" , "vmware"] , 	 
-	"https://spring.io/blog.atom" : [ "twis"  ] , 	 
-	"https://cloudfoundry.org/feed/" : [ "twis"  , "cloud" , "cloudfoundry"  ] , 	 
-	"https://kubernetes.io/feed.xml" : [ "twis"  , "cloud" , "kubernetes"  ]  
-
+	"http://feeds.feedburner.com/vmware/vmworld" : [ "twis" , "vmware" ], 	 
+	"https://blogs.vmware.com/research/feed/" : [ "twis" , "vmware" ], 	 
+	"https://blogs.vmware.com/opensource/feed/" : [ "twis" , "vmware" ],
+	"https://spring.io/blog.atom" : [ "twis" ],
+	"https://cloudfoundry.org/feed/" : [ "twis", "cloud", "cloudfoundry" ],
+	"https://kubernetes.io/feed.xml" : [ "twis", "cloud", "kubernetes" ]
 }

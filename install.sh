@@ -1,12 +1,15 @@
 #!/usr/bin/env bash 
 
-# source $HOME/Desktop/deployment/${NS}-env.sh
-helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com
+
+
+helm repo add this-week-in-charts https://this-week-in-charts.storage.googleapis.com 
 
 INGEST_FEED_ENCODED_MAPPINGS=$( cat feed-mappings.json | base64 )
 INGEST_TWITTER_ENCODED_MAPPINGS=$( cat twitter-mappings.json | base64  )
 NS=$TWI_NS
 CHART_NAME=twi-${NS}-helm-chart 
+
+helm list -n $NS
 
 function create_ip(){
     IPN=$1

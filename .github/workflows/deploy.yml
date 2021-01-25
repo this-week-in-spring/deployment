@@ -61,5 +61,4 @@ jobs:
       - name: Deploy
         run: |
           cd $GITHUB_WORKSPACE
-          helm list -n $TWI_NS 
           ./install.sh
