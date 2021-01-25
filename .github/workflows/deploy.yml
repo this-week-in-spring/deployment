@@ -61,6 +61,7 @@ jobs:
 
       - name: Deploy
         run: |
+          helm search hub wordpress
           echo $KUBECONFIG
           ls -la $HOME
           ls -la $HOME/.kube/config 
