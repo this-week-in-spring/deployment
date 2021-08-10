@@ -27,7 +27,6 @@ env:
   INGEST_FEED_ENCODED_MAPPINGS : ${{ secrets.INGEST_FEED_ENCODED_MAPPINGS }}
   INGEST_TWITTER_ENCODED_MAPPINGS : ${{ secrets.INGEST_TWITTER_ENCODED_MAPPINGS }}
   
-
 on:
   push:
     branches: [ main ]
