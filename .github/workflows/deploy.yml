@@ -9,11 +9,8 @@ env:
   DB_HOST: ${{ secrets.DB_HOST  }}
   DB_PW: ${{ secrets.DB_PW  }}
   DB_USER: ${{ secrets.DB_USER  }}
-  GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT  }}
-  GCLOUD_SA_KEY: ${{ secrets.GCLOUD_SA_KEY }}
-  GCLOUD_ZONE: ${{ secrets.GCLOUD_ZONE  }}
   GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-  GKE_CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }} 
+  
   PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }} 
   REDIS_HOST: ${{ secrets.REDIS_HOST }} 
   REDIS_PORT: ${{ secrets.REDIS_PORT }} 
@@ -26,13 +23,14 @@ env:
   INGESTED_TAG :  ${{ secrets.INGESTED_TAG }}
   INGEST_FEED_ENCODED_MAPPINGS : ${{ secrets.INGEST_FEED_ENCODED_MAPPINGS }}
   INGEST_TWITTER_ENCODED_MAPPINGS : ${{ secrets.INGEST_TWITTER_ENCODED_MAPPINGS }}
-  
   GKE_CLUSTER: twi
   GKE_ZONE: us-central1-c
-  GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-  PROJECT_ID: ${{ secrets.GCLOUD_PROJECT }}
+  GKE_PROJECT: bootiful
 
-  
+  # GCLOUD_ZONE: ${{ secrets.GCLOUD_ZONE  }}  
+  # GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT  }}
+  # GCLOUD_SA_KEY: ${{ secrets.GCLOUD_SA_KEY }}
+  # GKE_CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }} 
 on:
   push:
     branches: [ main ]
@@ -63,7 +61,9 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - run: |
-          kubectl get pods
+          gcloud config set project $PROJECT_ID
+      # gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+      # kubectl get pods
       #     gcloud config set project $PROJECT_ID
       #     gcloud --quiet auth configure-docker
       #     gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
