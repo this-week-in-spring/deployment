@@ -63,7 +63,7 @@ jobs:
       - run: |
           gcloud config set project $GKE_PROJECT 
           gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-          kubectl get pods
+          kubectl get pods -n twis
       #     gcloud config set project $PROJECT_ID
       #     gcloud --quiet auth configure-docker
       #     gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
