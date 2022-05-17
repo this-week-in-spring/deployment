@@ -1,6 +1,8 @@
 = Deployment
 
-This repository deploys the off-the-shelf http://github.com/this-week-in/[_This Week In..._] components with some configuration to tailor it to the needs of http://spring.io/blog[_This Week In Spring_]. 
+This repository deploys the off-the-shelf http://github.com/this-week-in/[_This Week In..._] components with some configuration to tailor it to the needs of http://spring.io/blog[_This Week In Spring_].  
+
+
 
 == Changelog 
 
