@@ -61,7 +61,7 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - run: |
-          gcloud config set project $PROJECT_ID
+          gcloud config set project ${{ secrets.GKE_PROJECT }}
       # gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
       # kubectl get pods
       #     gcloud config set project $PROJECT_ID
