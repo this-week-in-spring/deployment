@@ -54,7 +54,7 @@ jobs:
         with:
           version: 3.5.0
 
-      # - name: Deploy
-      #   run: |
-      #     cd $GITHUB_WORKSPACE
-      #     ./install.sh
+      - name: Deploy
+        run: |
+          cd $GITHUB_WORKSPACE
+          ./install.sh
