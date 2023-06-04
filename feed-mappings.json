@@ -3,5 +3,6 @@
 	"https://spring.io/blog.atom" : [ "twis" ],
 	"https://www.cloudfoundry.org/feed/" : [ "twis", "cloud", "cloudfoundry" ],
 	"https://kubernetes.io/feed.xml" : [ "twis", "cloud", "kubernetes" ] ,
-	"https://feeds.feedblitz.com/baeldung&x=1" : ["twis" , "baeldung" ] 
+	"https://feeds.feedblitz.com/baeldung&x=1" : ["twis" , "baeldung" ]  ,
+	"https://vladmihalcea.com/feed/" : ["twis" , "hibernate"] 
 }

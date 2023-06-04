@@ -10,7 +10,7 @@
 
 
 	"vmware":{ 
-		"twis":["spring"    , "SpringOne" , "SpringBoot", "java" , "azure" , "kubernetes" , "CloudFoundry" , "TAS", "TKG",    "Spring Cloud" , "Spring Boot" ] 
+		"twis":["spring"    , "SpringOne" , "SpringBoot", "java" , "azure" , "kubernetes" ,  "KNative","CloudFoundry" , "TAS", "TAP" , "TKG", "Spring Cloud" , "Spring Boot" ] 
 	} 
 ,
 
