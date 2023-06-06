@@ -25,7 +25,7 @@ helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade"
 echo "Performing a helm ${HELM_COMMAND}..."
 git clone https://github.com/this-week-in/helm-charts.git my-chart 
 cd my-chart
-helm install $CHART_NAME ./twi  \
+helm $HELM_COMMAND $CHART_NAME ./twi  \
  --namespace=$NS \
  --set twi.prefix=$NS \
  --set twi.domain=$TWI_DOMAIN  \
