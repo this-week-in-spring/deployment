@@ -4,10 +4,10 @@ set -o pipefail
 
 
 NS=$TWI_NS
-CHART_NAME=twi-helm-chart 
+CHART_NAME=twi 
 
 
-helm repo add this-week-in https://this-week-in.github.io/helm-charts/
+helm repo add twi https://this-week-in.github.io/helm-charts/
 helm repo add stable https://charts.helm.sh/stable
 helm repo list
 
@@ -24,7 +24,7 @@ function init(){
     kubectl get ns/$NS || kubectl create namespace ${NS} 
 }
 
-init 
+# init 
 
 
 HELM_COMMAND="install"
