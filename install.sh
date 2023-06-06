@@ -7,9 +7,9 @@ NS=$TWI_NS
 CHART_NAME=twi 
 
 
-helm repo add twi https://this-week-in.github.io/helm-charts/
-helm repo add stable https://charts.helm.sh/stable
-helm repo list
+# helm repo add twi https://this-week-in.github.io/helm-charts/
+# helm repo add stable https://charts.helm.sh/stable
+# helm repo list
 
 
 function create_ip(){
@@ -30,8 +30,8 @@ init
 HELM_COMMAND="install"
 helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
-
-helm $HELM_COMMAND \
+helm upgrade  $CHART_NAME  \
+ https://this-week-in.github.io/helm-charts/ --install --wait --atomic --namespace=$NS \
  --set twi.prefix=$NS \
  --set twi.domain=$TWI_DOMAIN  \
  --set twi.postgres.username=$DB_USER  \
@@ -48,8 +48,6 @@ helm $HELM_COMMAND \
  --set twi.twitter.client_key_secret=${TWITTER_CLIENT_KEY_SECRET} \
  --set twi.ingest.feed.mappings=$INGEST_FEED_ENCODED_MAPPINGS \
  --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS \
- --namespace $NS  \
- $CHART_NAME . 
 
 # sleep 30
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
