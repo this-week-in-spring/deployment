@@ -11,3 +11,5 @@ This repository deploys the off-the-shelf http://github.com/this-week-in/[_This 
 * 2023-06-06 - major update to some of the components including the studio. this introduces OAuth protection with Spring Cloud Gateway too.  
 
 
+
+
