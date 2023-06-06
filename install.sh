@@ -2,15 +2,8 @@
 set -e
 set -o pipefail
 
-
 NS=$TWI_NS
 CHART_NAME=twi 
-
-
-# helm repo add twi https://this-week-in.github.io/helm-charts/
-# helm repo add stable https://charts.helm.sh/stable
-# helm repo list
-
 
 function create_ip(){
     IPN=$1
