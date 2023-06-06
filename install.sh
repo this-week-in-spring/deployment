@@ -24,14 +24,14 @@ function init(){
     kubectl get ns/$NS || kubectl create namespace ${NS} 
 }
 
-# init 
+init 
 
 
 HELM_COMMAND="install"
 helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
 
-helm  $HELM_COMMAND \
+helm $HELM_COMMAND \
  --set twi.prefix=$NS \
  --set twi.domain=$TWI_DOMAIN  \
  --set twi.postgres.username=$DB_USER  \
@@ -51,7 +51,7 @@ helm  $HELM_COMMAND \
  --namespace $NS  \
  $CHART_NAME . 
 
-sleep 30
+# sleep 30
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-bookmark-ingest-cronjob ${NS}-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-feed-ingest-cronjob ${NS}-twi-feed-ingest-cronjob-${RANDOM} -n $NS 
