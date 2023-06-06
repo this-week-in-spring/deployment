@@ -1,4 +1,7 @@
 #!/usr/bin/env bash 
+set -e
+set -o pipefail
+
 
 NS=$TWI_NS
 CHART_NAME=twi-helm-chart 
