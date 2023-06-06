@@ -47,7 +47,7 @@ helm upgrade  $CHART_NAME  \
  --set twi.twitter.client_key=${TWITTER_CLIENT_KEY} \
  --set twi.twitter.client_key_secret=${TWITTER_CLIENT_KEY_SECRET} \
  --set twi.ingest.feed.mappings=$INGEST_FEED_ENCODED_MAPPINGS \
- --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS \
+ --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS 
 
 # sleep 30
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
