@@ -30,7 +30,7 @@ init
 HELM_COMMAND="install"
 helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
-git clone git@github.com:this-week-in/helm-charts.git my-chart 
+git clone https://github.com/this-week-in/helm-charts.git my-chart 
 cd my-chart
 helm install $CHART_NAME ./twi  \
  --namespace=$NS \
