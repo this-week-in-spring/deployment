@@ -1,7 +1,13 @@
 #!/usr/bin/env bash 
 
 NS=$TWI_NS
-CHART_NAME=twi-${NS}-helm-chart 
+CHART_NAME=twi-helm-chart 
+
+
+helm repo add this-week-in https://this-week-in.github.io/helm-charts/
+helm repo add stable https://charts.helm.sh/stable
+
+
 
 function create_ip(){
     IPN=$1
