@@ -30,8 +30,10 @@ init
 HELM_COMMAND="install"
 helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
 echo "Performing a helm ${HELM_COMMAND}..."
-helm upgrade  $CHART_NAME  \
- https://this-week-in.github.io/helm-charts/ --install --wait --atomic --namespace=$NS \
+git clone git@github.com:this-week-in/helm-charts.git my-chart 
+cd my-chart
+helm install $CHART_NAME ./twi  \
+ --namespace=$NS \
  --set twi.prefix=$NS \
  --set twi.domain=$TWI_DOMAIN  \
  --set twi.postgres.username=$DB_USER  \
