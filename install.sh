@@ -66,3 +66,4 @@ helm $HELM_COMMAND $CHART_NAME ./twi  \
 # kubectl create job --from=cronjob/${NS}-twi-feed-ingest-cronjob ${NS}-twi-feed-ingest-cronjob-${RANDOM} -n $NS
  
  
+ 
