@@ -17,11 +17,24 @@ function init(){
     kubectl get ns/$NS || kubectl create namespace ${NS} 
 }
 
+function reset(){ 
+    for d in twis-twi-bookmark-api twis-twi-studio-client twis-twi-studio-gateway    
+    do 
+            dn=deployments/$d
+            kubectl delete deployments -f   $dn || echo "could not delete $dn "
+    done
+}
+
 init 
+
 
 
 HELM_COMMAND="install"
 helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
+
+# todo remove this 
+helm list -n $NS | grep $CHART_NAME && reset
+
 echo "Performing a helm ${HELM_COMMAND}..."
 git clone https://github.com/this-week-in/helm-charts.git my-chart 
 cd my-chart
