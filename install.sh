@@ -20,7 +20,7 @@ function init(){
 function reset(){ 
     for d in ${NS}-twi-bookmark-api ${NS}-twi-studio-client ${NS}-twi-studio-gateway    
     do 
-            for dn in "deployments/$d" "managedcertificates/${d}-certificate" "ingress/${d}" "service/${d}-service"
+            for dn in "deployments/$d" "managedcertificates/${d}-certificate" "ingress/${d}-ingress" "service/${d}-service"
             do
                 echo "trying [kubectl delete $dn]..."
                 kubectl delete $dn || echo "could not delete $dn "
@@ -64,6 +64,7 @@ helm $HELM_COMMAND $CHART_NAME ./twi  \
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-bookmark-ingest-cronjob ${NS}-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-feed-ingest-cronjob ${NS}-twi-feed-ingest-cronjob-${RANDOM} -n $NS 
+ 
  
  
  
