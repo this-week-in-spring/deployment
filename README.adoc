@@ -2,11 +2,10 @@
 
 This repository deploys the off-the-shelf http://github.com/this-week-in/[_This Week In..._] components with some configuration to tailor it to the needs of http://spring.io/blog[_This Week In Spring_].  
 
-
-
 == Changelog 
 
 * 2022-05-17 - updated Github Actions configuration to use new github actions syntax. 
   Also, updated Helm chart to no longer use older beta `Cronjob` type
 * 2023-06-06 - major update to some of the components including the studio. this introduces OAuth protection with Spring Cloud Gateway too.  
 * 2023-06-07 - I got the new `bookmarks-api` successfully deploying.
+
