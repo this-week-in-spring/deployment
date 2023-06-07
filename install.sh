@@ -21,7 +21,7 @@ function reset(){
     for d in twis-twi-bookmark-api twis-twi-studio-client twis-twi-studio-gateway    
     do 
             dn=deployments/$d
-            kubectl delete deployments -f   $dn || echo "could not delete $dn "
+            kubectl delete deployments/$dn || echo "could not delete $dn "
     done
 }
 
