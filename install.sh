@@ -24,7 +24,7 @@ function reset(){
             do
                 echo "trying [kubectl delete $dn]..."
                 kubectl delete $dn || echo "could not delete $dn "
-            do 
+            done
     done
 }
 
@@ -64,4 +64,5 @@ helm $HELM_COMMAND $CHART_NAME ./twi  \
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-bookmark-ingest-cronjob ${NS}-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-feed-ingest-cronjob ${NS}-twi-feed-ingest-cronjob-${RANDOM} -n $NS
+ 
  
