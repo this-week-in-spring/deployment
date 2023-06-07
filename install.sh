@@ -37,7 +37,7 @@ HELM_COMMAND="install"
 helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
 
 # todo remove this 
-# helm list -n $NS | grep $CHART_NAME && reset
+helm list -n $NS | grep $CHART_NAME && reset
 
 echo "Performing a helm ${HELM_COMMAND}..."
 git clone https://github.com/this-week-in/helm-charts.git my-chart 
@@ -65,6 +65,7 @@ helm $HELM_COMMAND $CHART_NAME ./twi  \
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-bookmark-ingest-cronjob ${NS}-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
 # kubectl create job --from=cronjob/${NS}-twi-feed-ingest-cronjob ${NS}-twi-feed-ingest-cronjob-${RANDOM} -n $NS
+ 
  
  
  
