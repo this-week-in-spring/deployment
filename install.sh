@@ -20,10 +20,9 @@ function init(){
 function reset(){ 
     for d in ${NS}-twi-bookmark-api ${NS}-twi-studio-client ${NS}-twi-studio-gateway    
     do 
-            # for dn in "deployments/$d" "managedcertificates/${d}-certificate" "ingress/${d}-ingress" "service/${d}-service"
-            for dn in "deployments/$d" 
+            for dn in "deployments/$d" # "managedcertificates/${d}-certificate" "ingress/${d}-ingress" "service/${d}-service"
             do
-                echo "trying [kubectl delete $dn]..."
+                echo "running: kubectl delete $dn "
                 kubectl delete $dn || echo "could not delete $dn "
             done
     done
@@ -59,7 +58,12 @@ helm $HELM_COMMAND $CHART_NAME ./twi  \
  --set twi.twitter.client_key=${TWITTER_CLIENT_KEY} \
  --set twi.twitter.client_key_secret=${TWITTER_CLIENT_KEY_SECRET} \
  --set twi.ingest.feed.mappings=$INGEST_FEED_ENCODED_MAPPINGS \
- --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS 
+ --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS \
+ --set twi.oauth.client_key=$TWI_OAUTH_CLIENT_KEY \
+ --set twi.oauth.client_key_secret=$TWI_OAUTH_CLIENT_KEY_SECRET \
+ --set twi.oauth.issuer_uri=$TWI_OAUTH_ISSUER_URI 
+
+
 
 # sleep 30
 # kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
