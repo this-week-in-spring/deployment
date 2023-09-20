@@ -9,4 +9,3 @@ This repository deploys the off-the-shelf http://github.com/this-week-in/[_This 
 * 2023-06-06 - major update to some of the components including the studio. this introduces OAuth protection with Spring Cloud Gateway too. 
 * 2023-06-07 - I got the new `bookmarks-api` successfully deployed.
 * 2023-09-11 - I am trying to get this working with a more hardened Spring Authorization Server instance
- 
