@@ -1,8 +1,8 @@
-{ 
-	"https://api.joshlong.com/feed.xml" : [ "twis", "joshlong"],
+{  
+	 "https://www.baeldung.com/feed" : ["spring", "twis", "java"],
+	"https://api.joshlong.com/feed.xml" : ["twis", "java" , "spring" ] ,
+        "https://kubernetes.io/feed.xml": ["kubernetes", "cloud", "twis"] ,
 	"https://spring.io/blog.atom" : [ "twis" ],
-	"https://www.cloudfoundry.org/feed/" : [ "twis", "cloud", "cloudfoundry" ],
-	"https://kubernetes.io/feed.xml" : [ "twis", "cloud", "kubernetes" ] ,
-	"https://feeds.feedblitz.com/baeldung&x=1" : ["twis" , "baeldung" ]  ,
-	"https://vladmihalcea.com/feed/" : ["twis" , "hibernate"] 
+	"https://cloudfoundry.org/feed/" : [ "twis", "cloud", "cloudfoundry" ],
+	"https://kubernetes.io/feed.xml" : [ "twis", "cloud", "kubernetes" ]
 }
